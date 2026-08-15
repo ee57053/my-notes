@@ -1,0 +1,23 @@
+// ============================================================
+//  prisma/schema.prisma
+//  データベースの「設計図」。ここに書いた通りのテーブルが作られます。
+// ============================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  // 開発中はまず SQLite が一番ラク（ファイル1つがDBになる。サーバー不要）
+  // 本番で PostgreSQL に変えたくなったら provider を "postgresql" にするだけ
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// メモ1件を表すモデル（= notes テーブル）
+model Note {
+  id        Int      @id @default(autoincrement()) // 自動で振られる連番ID
+  title     String
+  body      String   @default("")
+  createdAt DateTime @default(now())               // 作成時に自動で今の時刻が入る
+}
