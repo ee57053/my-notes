@@ -10,8 +10,9 @@ generator client {
 datasource db {
   // 開発中はまず SQLite が一番ラク（ファイル1つがDBになる。サーバー不要）
   // 本番で PostgreSQL に変えたくなったら provider を "postgresql" にするだけ
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 // メモ1件を表すモデル（= notes テーブル）
